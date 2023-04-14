@@ -1,7 +1,7 @@
 //Example 5: ShowTwoNumbers.java
 import javax.swing.JOptionPane;
 
-public class HelloNameDialog {
+public class ShowTwoNumbers {
     public static void main(String[] args) {
         String strNum1, strNum2;
         String strNotification = "You've just entered: ";
