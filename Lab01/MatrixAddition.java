@@ -1,3 +1,5 @@
+// MatrixAddition.java - 6.6
+
 import java.util.Scanner;
 
 public class MatrixAddition {
