@@ -1,3 +1,5 @@
+// Equations.java - 2.2.6
+
 import javax.swing.JOptionPane;
 
 public class Equations {
