@@ -1,3 +1,5 @@
+// Triangle.java - 6.3
+
 import java.util.Scanner;
 
 public class Triangle {
