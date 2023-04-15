@@ -1,0 +1,310 @@
+// Operators.java - 2.2.5
+
+import javax.swing.JOptionPane;
+
+public class Operators {
+    public static void main(String[] args) {
+        String strNum1, strNum2;
+        String strNotification = "";
+
+        strNum1 = JOptionPane.showInputDialog(null, "Please input the first number:", "Input the first number", JOptionPane.INFORMATION_MESSAGE);
+        strNum2 = JOptionPane.showInputDialog(null, "Please input the second number:", "Input the second number", JOptionPane.INFORMATION_MESSAGE);
+
+        double num1 = Double.parseDouble(strNum1);
+        double num2 = Double.parseDouble(strNum2);
+
+        strNotification += "The sum of two numbers is " + (num1 + num2) + "\n";
+        strNotification += "The difference of two numbers is " + (num1 - num2) + "\n";
+        strNotification += "The product of two numbers is " + (num1 * num2) + "\n";
+        strNotification += "The quotient of two numbers is " + (num1 / num2);
+
+        JOptionPane.showMessageDialog(null, strNotification, "Operators between two numbers", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
+}
+
+
+// Equations.java - 2.2.6
+
+import javax.swing.JOptionPane;
+
+public class Equations {
+    public static void firstOrderEquation() {
+        String strA, strB;
+        String strNotification = "";
+
+        strA = JOptionPane.showInputDialog(null, "Please input a: ", "First order equation", JOptionPane.INFORMATION_MESSAGE);
+        strB = JOptionPane.showInputDialog(null, "Please input b: ", "First order equation", JOptionPane.INFORMATION_MESSAGE);
+
+        strNotification += strA + "x + " + strB + " = 0\n";
+        if (Double.parseDouble(strA) != 0) {
+            double solution = -Double.parseDouble(strB) / Double.parseDouble(strA);
+            strNotification += "The solution of the equation is x = " + solution;
+            JOptionPane.showMessageDialog(null, strNotification, "First order equation", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "This equation has no solution!", "First order equation", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public static void firstOrderSystem() {
+        String strA11, strA12, strB1, strA21, strA22, strB2;
+        String strNotification = "";
+
+        strA11 = JOptionPane.showInputDialog(null, "Please input a11: ", "First order system", JOptionPane.INFORMATION_MESSAGE);
+        strA12 = JOptionPane.showInputDialog(null, "Please input a12: ", "First order system", JOptionPane.INFORMATION_MESSAGE);
+        strB1 = JOptionPane.showInputDialog(null, "Please input b1: ", "First order system", JOptionPane.INFORMATION_MESSAGE);
+        strA21 = JOptionPane.showInputDialog(null, "Please input a21: ", "First order system", JOptionPane.INFORMATION_MESSAGE);
+        strA22 = JOptionPane.showInputDialog(null, "Please input a22: ", "First order system", JOptionPane.INFORMATION_MESSAGE);
+        strB2 = JOptionPane.showInputDialog(null, "Please input b2: ", "First order system", JOptionPane.INFORMATION_MESSAGE);
+
+        strNotification += strA11 + "x1 + " + strA12 + "x2 = " + strB1 + "\n";
+        strNotification += strA21 + "x1 + " + strA22 + "x2 = " + strB2 + "\n";
+
+        double D = Double.parseDouble(strA11) * Double.parseDouble(strA22) - Double.parseDouble(strA12) * Double.parseDouble(strA21);
+        double D1 = Double.parseDouble(strB1) * Double.parseDouble(strA22) - Double.parseDouble(strA12) * Double.parseDouble(strB2);
+        double D2 = Double.parseDouble(strA11) * Double.parseDouble(strB2) - Double.parseDouble(strB1) * Double.parseDouble(strA21);
+
+        if (D != 0) {
+            if (Double.parseDouble(strB1) == 0 && Double.parseDouble(strB2) == 0) {
+                System.out.println("The system has trivial solution!");
+            } else {
+                double x1 = D1 / D, x2 = D2 / D;
+                strNotification += "The first component of the solution is x1 = " + x1 + "\n";
+                strNotification += "The second component of the solution is x2 = " + x2;
+                JOptionPane.showMessageDialog(null, strNotification, "First order system", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            if (D1 == 0 && D2 == 0) {
+                strNotification += "The system has infinitely many solutions!";
+                JOptionPane.showMessageDialog(null, strNotification, "First order system", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                strNotification += "The system has no solution!";
+                JOptionPane.showMessageDialog(null, strNotification, "First order system", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    public static void secondOrderEquation() {
+        String strA, strB, strC;
+        String strNotification = "";
+
+        strA = JOptionPane.showInputDialog(null, "Please input a: ", "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+        strB = JOptionPane.showInputDialog(null, "Please input b: ", "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+        strC = JOptionPane.showInputDialog(null, "Please input c: ", "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+
+        strNotification += strA + "x + " + strB + "x + " + strC + " = 0\n";
+        if (Double.parseDouble(strA) != 0) {
+            double delta = Math.pow(Double.parseDouble(strB), 2) - 4 * Double.parseDouble(strA) * Double.parseDouble(strC);
+            if (delta > 0) {
+                double solution1 = (-Double.parseDouble(strB) + Math.sqrt(delta)) / (2 * Double.parseDouble(strA));
+                double solution2 = (-Double.parseDouble(strB) - Math.sqrt(delta)) / (2 * Double.parseDouble(strA));
+                strNotification += "The first solution of the equation is x1 = " + solution1 + "\n";
+                strNotification += "The second solution of the equation is x2 = " + solution2;
+                JOptionPane.showMessageDialog(null, strNotification, "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+            } else if (delta == 0) {
+                double solution = -Double.parseDouble(strB) / (2 * Double.parseDouble(strA));
+                strNotification += "The solution of the equation is x = " + solution;
+                JOptionPane.showMessageDialog(null, strNotification, "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "The equation has no solution!", "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            if (Double.parseDouble(strB) != 0) {
+                double solution = -Double.parseDouble(strC) / Double.parseDouble(strB);
+                strNotification += "The solution of the equation is x = " + solution;
+                JOptionPane.showMessageDialog(null, strNotification, "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "The equation has no solution!", "Second order equation", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        firstOrderEquation();
+        firstOrderSystem();
+        secondOrderEquation();
+    }
+}
+
+
+// ChoosingOption.java - 6.1
+
+import javax.swing.JOptionPane;
+
+public class ChoosingOption {
+    public static void main(String[] args) {
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to change the first class ticket?");
+        JOptionPane.showMessageDialog(null, "You've chosen: " + (option==JOptionPane.YES_OPTION?"YES":"NO"));
+        System.exit(0);
+    }
+}
+
+
+// InputFromKeyboard.java - 6.2
+
+import java.util.Scanner;
+
+public class InputFromKeyboard {
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("What's your name? ");
+        String strName = keyboard.nextLine();
+        System.out.println("How old are you? ");
+        int iAge = keyboard.nextInt();
+        System.out.println("How tall are you (m)? ");
+        double dHeight = keyboard.nextDouble();
+
+        System.out.println("Mrs/Ms. " + strName + " , " + iAge + " years old. " + "Your height is " + dHeight + ".");
+    }
+}
+
+
+// Triangle.java - 6.3
+
+import java.util.Scanner;
+
+public class Triangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = n - i; j > 1; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+// DaysOfMonth.java - 6.4
+
+import java.util.Scanner;
+
+public class DaysOfMonth {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter month");
+        String strMonth = sc.nextLine();
+        System.out.println("Please enter year: ");
+        int iYear = sc.nextInt();
+
+        if (strMonth.equals("January") || strMonth.equals("Jan.") || strMonth.equals("Jan") || strMonth.equals("1") ||
+                strMonth.equals("March") || strMonth.equals("Mar.") || strMonth.equals("Mar") || strMonth.equals("3") ||
+                strMonth.equals("May") || strMonth.equals("5") ||
+                strMonth.equals("July") || strMonth.equals("Jul") || strMonth.equals("7") ||
+                strMonth.equals("August") || strMonth.equals("Aug.") || strMonth.equals("Aug") || strMonth.equals("8") ||
+                strMonth.equals("October") || strMonth.equals("Oct.") || strMonth.equals("Oct") || strMonth.equals("10") ||
+                strMonth.equals("December") || strMonth.equals("Dem.") || strMonth.equals("Dem") || strMonth.equals("12")) {
+            System.out.println("Number of days: 31");
+        }
+        else if (strMonth.equals("April") || strMonth.equals("Apr.") || strMonth.equals("Apr") || strMonth.equals("4") ||
+                strMonth.equals("June") || strMonth.equals("Jun") || strMonth.equals("6") ||
+                strMonth.equals("September") || strMonth.equals("Sept.") || strMonth.equals("Sep") || strMonth.equals("9") ||
+                strMonth.equals("November") || strMonth.equals("Nov.") || strMonth.equals("Nov") || strMonth.equals("11")) {
+            System.out.println("Number of days: 30");
+        }
+        else if (strMonth.equals("February") || strMonth.equals("Feb.") || strMonth.equals("Feb") || strMonth.equals("2")) {
+            if ((iYear % 4 == 0 && iYear % 100 != 0) || iYear % 400 == 0) {
+                System.out.println("Number of days: 29");
+            } else {
+                System.out.println("Number of days: 28");
+            }
+        } else {
+            System.out.println("Please enter again!");
+        }
+    }
+}
+
+
+// ArraySort.java - 6.5
+
+import java.util.Scanner;
+
+public class ArraySort {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter the number of elements: ");
+        int n = sc.nextInt();
+        System.out.println("Please enter the input array: ");
+        int[] a = new int[n];
+
+        for(int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
+                if (a[i] > a[j]) {
+                    int temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                }
+            }
+        }
+
+        System.out.println("Sorted array: ");
+        for(int i = 0; i < n; i++) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println();
+
+        int sumOfArray = 0;
+        for (int i = 0; i < n; i++) {
+            sumOfArray += a[i];
+        }
+        System.out.println("Sum of array elements: " + sumOfArray);
+        System.out.println("Average value of array elements: " + (sumOfArray / n));
+    }
+}
+
+
+// MatrixAddition.java - 6.6
+
+import java.util.Scanner;
+
+public class MatrixAddition {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the number of row: ");
+        int row = input.nextInt();
+        System.out.print("Enter the number of column: ");
+        int column = input.nextInt();
+
+        int[][] matrix1 = new int[row][column];
+        System.out.println("Enter the values for the first matrix: ");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix1[i][j] = input.nextInt();
+            }
+        }
+
+        int[][] matrix2 = new int[row][column];
+        System.out.println("Enter the values for the second matrix: ");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                matrix2[i][j] = input.nextInt();
+            }
+        }
+
+        int[][] sum = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                sum[i][j] = matrix1[i][j] + matrix2[i][j];
+            }
+        }
+
+        System.out.println("The sum of the matrices is: ");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                System.out.print(sum[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
