@@ -1,3 +1,5 @@
+// ChoosingOption.java - 6.1
+
 import javax.swing.JOptionPane;
 
 public class ChoosingOption {
