@@ -1,22 +1,16 @@
 public class Aims {
     public static void main(String[] args) {
-        // Create a new cart
-        Cart anOrder = new Cart();
-
-        // Create new dvd objects and add them to the cart
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Aller", 87, 19.95f);
-        anOrder.addDigitalVideoDisc(dvd1);
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
-        anOrder.addDigitalVideoDisc(dvd2);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
-        anOrder.addDigitalVideoDisc(dvd3);
-
-        // Print total cost of the items in the cart
-        System.out.println("Total Cost is: ");
-        System.out.println(anOrder.totalCost());
-
-        anOrder.removeDigitalVideoDisc(dvd1);
-        anOrder.removeDigitalVideoDisc(dvd2);
-        anOrder.removeDigitalVideoDisc(dvd3);
+        if (Order.checkNumberOfOrder()) {
+            Order anOrder = new Order();
+            DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95);
+            DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 124, 24.95);
+            DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin", "Animation", "John Musker", 90, 18.99);
+            anOrder.addDigitalVideoDisc(dvd1);
+            anOrder.addDigitalVideoDisc(dvd2);
+            anOrder.addDigitalVideoDisc(dvd3);
+            System.out.println("Total cost is: " + anOrder.totalCost());
+        } else {
+            System.out.println("The numbers of orders is over the limited.");
+        }
     }
 }
