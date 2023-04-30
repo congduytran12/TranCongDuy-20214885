@@ -3,6 +3,7 @@ import java.util.Comparator;
 import java.util.Collections;
 
 public class Cart {
+    public static final int MAX_NUMBER_ORDERED = 20;
     private ArrayList<DigitalVideoDisc> itemsOrdered;
 
     public Cart() {
@@ -43,8 +44,8 @@ public class Cart {
         });
     }
 
-    public double totalCost() {
-        double total = 0;
+    public float totalCost() {
+        float total = 0;
         for (DigitalVideoDisc disc : itemsOrdered) {
             total += disc.getCost();
         }
