@@ -1,20 +1,8 @@
-public class DigitalVideoDisc extends Media{
-    private String director;
-    private int length;       
+public class DigitalVideoDisc extends Disc {     
     private static int nbDigitalVideoDiscs = 0;
 
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        super(title, category, cost);
-        this.length = length;
-        this.cost = cost;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public int getLength() {
-        return length;
+        super(title, category, director, length, cost);
     }
 
     public void setDirector(String director) {
