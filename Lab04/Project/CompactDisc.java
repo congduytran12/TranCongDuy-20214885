@@ -37,4 +37,10 @@ public class CompactDisc extends Disc implements Playable{
         }
         return length;
     }
+    
+    public void play() {
+        for (Track track : tracks) {
+            track.play();
+        }
+    }
 }
