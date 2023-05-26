@@ -1,4 +1,4 @@
-public class Track {
+public class Track implements Playable {
     private String title;
     private int length;
     
