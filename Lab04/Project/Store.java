@@ -1,18 +1,17 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Store {
-    private List<String> itemsInStore;
+    private ArrayList<Media> itemsInStore;
 
     public Store() {
         itemsInStore = new ArrayList<>();
     }
 
-    public void addDVD(String dvd) {
+    public void addMedia(Media dvd) {
         itemsInStore.add(dvd);
     }
 
-    public void removeDVD(String dvd) {
+    public void removeMedia(Media dvd) {
         if (itemsInStore.contains(dvd)) {
             itemsInStore.remove(dvd);
         } else {
@@ -20,7 +19,7 @@ public class Store {
         }
     }
 
-    public List<String> getItemsInStore() {
+    public ArrayList<Media> getItemsInStore() {
         return itemsInStore;
     }
 }

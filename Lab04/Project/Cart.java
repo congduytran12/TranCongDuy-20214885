@@ -1,16 +1,11 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
 
 public class Cart {
     public static final int MAX_NUMBER_ORDERED = 20;
-    private ArrayList<DigitalVideoDisc> itemsOrdered;
+    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 
-    public Cart() {
-        itemsOrdered = new ArrayList<DigitalVideoDisc>();
-    }
-
-    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
+    public void addMedia(Media disc) {
         if (itemsOrdered.size() < MAX_NUMBER_ORDERED) {
             itemsOrdered.add(disc);
         } else {
@@ -18,8 +13,8 @@ public class Cart {
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc... dvdList) {
-        for (DigitalVideoDisc disc : dvdList) {
+    public void addMedia(Media... dvdList) {
+        for (Media disc : dvdList) {
             if (itemsOrdered.size() < MAX_NUMBER_ORDERED) {
                 itemsOrdered.add(disc);
             } else {
@@ -29,7 +24,7 @@ public class Cart {
         }
     }
 
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    public void addMedia(Media dvd1, Media dvd2) {
         if (itemsOrdered.size() < MAX_NUMBER_ORDERED) {
             itemsOrdered.add(dvd1);
             itemsOrdered.add(dvd2);
@@ -38,7 +33,7 @@ public class Cart {
         }
     }
 
-    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
+    public void removeMedia(Media disc) {
         itemsOrdered.remove(disc);
     }
 
@@ -47,30 +42,26 @@ public class Cart {
     }
 
     public void sortCartByTitle() {
-        Collections.sort(itemsOrdered, new Comparator<DigitalVideoDisc>() {
-            public int compare(DigitalVideoDisc disc1, DigitalVideoDisc disc2) {
-                if (disc1.getTitle().compareToIgnoreCase(disc2.getTitle()) == 0) {
-                    return Double.compare(disc2.getCost(), disc1.getCost());
-                }
-                return disc1.getTitle().compareToIgnoreCase(disc2.getTitle());
+        Collections.sort(itemsOrdered, (disc1, disc2) -> {
+            if (disc1.getTitle().compareToIgnoreCase(disc2.getTitle()) == 0) {
+                return Double.compare(disc2.getCost(), disc1.getCost());
             }
+            return disc1.getTitle().compareToIgnoreCase(disc2.getTitle());
         });
     }
 
     public void sortCartByCost() {
-        Collections.sort(itemsOrdered, new Comparator<DigitalVideoDisc>() {
-            public int compare(DigitalVideoDisc disc1, DigitalVideoDisc disc2) {
-                if (disc1.getCost() == disc2.getCost()) {
-                    return disc1.getTitle().compareToIgnoreCase(disc2.getTitle());
-                }
-                return Double.compare(disc2.getCost(), disc1.getCost());
+        Collections.sort(itemsOrdered, (disc1, disc2) -> {
+            if (disc1.getCost() == disc2.getCost()) {
+                return disc1.getTitle().compareToIgnoreCase(disc2.getTitle());
             }
+            return Double.compare(disc2.getCost(), disc1.getCost());
         });
     }
 
     public float totalCost() {
         float total = 0;
-        for (DigitalVideoDisc disc : itemsOrdered) {
+        for (Media disc : itemsOrdered) {
             total += disc.getCost();
         }
         return total;
@@ -80,7 +71,7 @@ public class Cart {
         System.out.println("***********************CART***********************");
         System.out.println("Order items:");
         for (int i = 0; i < itemsOrdered.size(); i++) {
-            DigitalVideoDisc dvd = itemsOrdered.get(i);
+            Media dvd = itemsOrdered.get(i);
             System.out.print("- " + dvd.toString() + ": " + dvd.getCost() + "$\n");
         }
         System.out.println("Total cost: " + totalCost() + "$");
@@ -89,9 +80,9 @@ public class Cart {
 
     public void searchByID(int id) {
         ArrayList<DigitalVideoDisc> results = new ArrayList<>();
-        for (DigitalVideoDisc dvd: itemsOrdered) {
+        for (Media dvd: itemsOrdered) {
             if (dvd.getId() == id) {
-                results.add(dvd);
+                results.add((DigitalVideoDisc) dvd);
             }
         }
         if (results.size() > 0) {
@@ -106,9 +97,9 @@ public class Cart {
 
     public void searchByTitle(String title) {
         ArrayList<DigitalVideoDisc> results = new ArrayList<>();
-        for (DigitalVideoDisc dvd: itemsOrdered) {
+        for (Media dvd: itemsOrdered) {
             if (dvd.isMatch(title)) {
-                results.add(dvd);
+                results.add((DigitalVideoDisc) dvd);
             }
         }
         if (results.size() > 0) {
@@ -121,13 +112,4 @@ public class Cart {
         }
     }
 
-    public int getQtyOrdered(DigitalVideoDisc disc) {
-        int qty = 0;
-        for (DigitalVideoDisc item : itemsOrdered) {
-            if (item.equals(disc)) {
-                qty++;
-            }
-        }
-        return qty;
-    }
 }
